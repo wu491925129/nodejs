@@ -1,0 +1,304 @@
+doctype html
+html(lang='en')
+  head
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(charset='utf-8')
+    title 数据中心监控平台
+    meta(name='description', content='overview & stats')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0')
+    // 跑马灯
+    link(rel='stylesheet', type='text/css', href='/assets/css/liMarquee.css')
+    // bootstrap & fontawesome
+    link(rel='stylesheet', href='/assets/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/assets/font-awesome/4.2.0/css/font-awesome.min.css')
+    // page specific plugin styles
+    // text fonts
+    link(rel='stylesheet', href='/assets/fonts/fonts.googleapis.com.css')
+    // ace styles
+    link#main-ace-style.ace-main-stylesheet(rel='stylesheet', href='/assets/css/ace.min.css')
+    //if lte IE 9
+      link.ace-main-stylesheet(rel='stylesheet', href='assets/css/ace-part2.min.css')
+    //if lte IE 9
+      link(rel='stylesheet', href='assets/css/ace-ie.min.css')
+    link(href='/assets/data-tables/css/demo_page.css', rel='stylesheet')
+    link(href='/assets/data-tables/css/demo_table.css', rel='stylesheet')
+    link(rel='stylesheet', href='/assets/data-tables/DT_bootstrap.css')
+    // ace settings handler
+    script(src='/assets/js/ace-extra.min.js')
+    script(src='/js/echarts.js')
+    // HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries
+    //if lte IE 8
+      script(src='assets/js/html5shiv.min.js')
+      script(src='assets/js/respond.min.js')
+    style.
+      .btn-light1{
+        background-color:#f2f2f2;
+      }
+      .h4text{
+        margin-top: 0px;
+        padding-left: 25px;
+        font-size: 20px;
+        font-weight: 500;
+        color:#fff;
+      }
+      .icon{
+        width:80px;
+        height: 80px;
+      }
+      .col-xs-2{
+        width:20%;
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+      .icon-text{
+        margin-top:15px;
+      }
+      .icon-padding{
+        padding-left: 0px;
+        padding-right: 0px;
+      }
+  body.no-skin(ng-app='myApp')
+    //h1= test[0].department
+    include include/header.html
+    #main-container.main-container
+      script(type='text/javascript').
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+      include include/sidebar.html
+      .main-content
+        .page-content
+          br
+          // PUSH MESSAGE
+          .col-md-12.panel(ng-controller='pushMsgController')
+            .col-md-1.marqueeLeft
+              span.marqueeSpan 消息动态
+            .dowebok.marquee1.col-md-11
+              span.alert(ng-repeat='item in message')
+                | {{item}}
+                span.alert.span-border
+                  |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|
+          // /DATA INFO
+          .panel.col-md-12(ng-controller='dataInfoController')
+            .col-xs-2
+              .panel.btn-light1
+                .panel-body
+                  .row
+                    .col-xs-8.icon-padding(align='center')
+                      - var data = datas[1].length
+                      p.state-title.icon-text.bigger-300
+                        | #{data}
+                        span(style='font-size:15px')  条
+                      // <h5 id="errorCount">数据交换总量</h5>
+                    .col-xs-4.icon-padding
+                      img.icon(src='/assets/img/icon_03.png', alt='')
+                .blue-bg.btn-warning(style='height:30px')
+                  p.h4text 数据交换总量
+            .col-xs-2
+              .panel.btn-light1
+                .panel-body
+                  .row
+                    .col-xs-7.icon-padding(align='center')
+                      - var department = datas[0].length
+                      p.state-title.icon-text.bigger-300
+                        | #{department}
+                        span(style='font-size:15px')  个
+                      // <h5 id="errorCount">数据交换总量</h5>
+                    .col-xs-5.icon-padding
+                      img.icon(src='/assets/img/icon_02.png', alt='')
+                .blue-bg.btn-info(style='height:30px')
+                  p.h4text 数据接入部门
+            .col-xs-2
+              .panel.btn-light1
+                .panel-body
+                  .row
+                    .col-xs-7.icon-padding(align='center')
+                      p.state-title.icon-text.bigger-300
+                        | {{dataInfo[2]}}
+                        span(style='font-size:15px')  个
+                      // <h5 id="errorCount">数据交换总量</h5>
+                    .col-xs-5.icon-padding
+                      img.icon(src='/assets/img/icon_04.png', alt='')
+                .blue-bg.btn-danger(style='height:30px')
+                  p.h4text 系统接入数量
+            .col-xs-2
+              .panel.btn-light1
+                .panel-body
+                  .row
+                    .col-xs-7.icon-padding(align='center')
+                      p.state-title.icon-text.bigger-300
+                        | {{dataInfo[3]}}
+                        span(style='font-size:15px')  个
+                      // <h5 id="errorCount">数据交换总量</h5>
+                    .col-xs-5.icon-padding
+                      img.icon(src='/assets/img/icon_05.png', alt='')
+                .blue-bg.btn-success(style='height:30px')
+                  p.h4text 服务提供总量
+            .col-xs-2
+              .panel.btn-light1
+                .panel-body
+                  .row
+                    .col-xs-8.icon-padding(align='center')
+                      p.state-title.icon-text.bigger-300
+                        | {{dataInfo[4]}}
+                        span(style='font-size:15px')  条
+                      // <h5 id="errorCount">数据交换总量</h5>
+                    .col-xs-4.icon-padding
+                      img.icon(src='/assets/img/icon_06.png', alt='')
+                .blue-bg.btn-purple(style='height:30px')
+                  p.h4text 服务调用总量
+          // charts
+          .col-md-12
+            #indexCharts.col-md-12(style='height:320px;')
+      // Footer
+      include include/footer.html
+      a#btn-scroll-up.btn-scroll-up.btn.btn-sm.btn-inverse(href='#')
+        i.ace-icon.fa.fa-angle-double-up.icon-only.bigger-110
+    // /.main-container
+    // basic scripts
+    //if !IE
+    script(src='/assets/js/jquery.2.1.1.min.js')
+    // <![endif]
+    //if IE
+      script(src='assets/js/jquery.1.11.1.min.js')
+    //if !IE
+    script(type='text/javascript').
+      window.jQuery || document.write("<script src='/assets/js/jquery.min.js'>"+"<"+"/script>");
+    // <![endif]
+    //if IE
+      script(type='text/javascript').
+        window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>"+"<"+"/script>");
+    script(type='text/javascript').
+      if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    script(src='/js/angular.min.js')
+    script(src='/js/angular-customList.js')
+    // 跑马灯
+    script(src='/js/jquery.liMarquee.js')
+    script(src='/assets/js/bootstrap.min.js')
+    // page specific plugin scripts
+    script(src='/assets/js/fuelux.tree.min.js')
+    // ace scripts
+    script(src='/assets/js/ace-elements.min.js')
+    script(src='/assets/js/ace.min.js')
+    script(type='text/javascript', language='javascript', src='/assets/data-tables/jquery.dataTables.js')
+    script(type='text/javascript', src='/assets/data-tables/DT_bootstrap.js')
+    script(src='/assets/data-tables/dynamic_table_init.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/js/angular.min.js')
+    script(src='/js/angular-customList.js')
+    script(type='text/javascript').
+      $(function(){
+        var $dowebok = $('.dowebok').liMarquee();
+      });
+    script(type='text/javascript').
+      var myChart = echarts.init(document.getElementById('indexCharts'));
+      // 指定图表的配置项和数据
+      option = {
+        title: {
+          text: '本月监控状态'
+        },
+        tooltip: {
+          trigger: 'axis'
+        },
+        legend: {
+          x: 'center',
+          data:['数据查询对比','数据交换最频繁部门','服务调用最频繁部门','数据发送量','数据接收量']
+        },
+        radar: [
+          {
+            indicator: [
+              {text: '人口库查询', max: 1000000},
+              {text: '法人查询', max: 1000000},
+              {text: '房屋库查询', max: 1000000},
+              {text: '法人资质信息查询', max: 1000000},
+              {text: '法人处罚信息查询', max: 1000000},
+            ],
+            center: ['20%','60%'],
+            radius: 80
+          },
+          {
+            indicator: [
+              {text: '民政局', max: 100000},
+              {text: '公安局', max: 100000},
+              {text: '工商局', max: 100000},
+              {text: '教育局', max: 100000},
+              {text: '科委', max: 100000}
+            ],
+            radius: 80,
+            center: ['50%','60%'],
+          },
+          {
+            indicator: [
+              {text: '民政局', max: 100000},
+              {text: '房地局', max: 100000},
+              {text: '公安局', max: 100000},
+              {text: '工商局', max: 100000},
+              {text: '教育局', max: 100000},
+              {text: '税务局', max: 100000},
+              {text: '审计局', max: 100000},
+              {text: '质检局', max: 100000},
+              {text: '地税局', max: 100000},
+              {text: '民防办', max: 100000},
+              {text: '司法局', max: 100000},
+              {text: '绿容局', max: 100000},
+              {text: '粮食局', max: 100000},
+              {text: '财政局', max: 100000},
+              {text: '体育局', max: 100000},
+              {text: '科委', max: 100000},
+              {text: '国土资源局', max: 100000},
+              {text: '新闻出版局', max: 100000},
+              {text: '监狱管理局', max: 100000},
+              {text: '生产监督管理局', max: 100000}
+            ],
+            center: ['80%','60%'],
+            radius: 80
+          }
+        ],
+        series: [
+          {
+            type: 'radar',
+            tooltip: {
+              trigger: 'item'
+            },
+            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+            data: [
+              {
+                value: [802340,731120,254560,657652,487789],
+                name: '数据查询对比'
+              }
+            ]
+          },
+          {
+            type: 'radar',
+            radarIndex: 1,
+            tooltip: {
+              trigger: 'item'
+            },
+            data: [
+              {
+                value: [85000, 90000, 60000, 95000, 55000],
+                name: '数据交换最频繁部门'
+              },
+              {
+                value: [75000, 80000, 35000, 90000, 93000],
+                name: '服务调用最频繁部门'
+              }
+            ]
+          },
+          {
+            type: 'radar',
+            radarIndex: 2,
+            itemStyle: {normal: {areaStyle: {type: 'default'}}},
+            data: [
+              {
+                name: '数据发送量',
+                value: [23800,12000,65080,42424,54342,45335,78889,40080,45663,24567,89000,45789,24456,78900,58000,45532,45564,26789,23455,89000],
+              },
+              {
+                name:'数据接收量',
+                value:[65080,42424,54342,45335,78889,40080,45663,24567,89000,45789,24456,78900,58000,45566,23456,24567,76543,56777,44555,23455]
+              }
+            ]
+          }
+        ]
+      };
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);

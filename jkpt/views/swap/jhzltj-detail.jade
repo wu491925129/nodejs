@@ -1,0 +1,327 @@
+doctype html
+html(lang="en")
+    head
+        meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+        meta(charset="utf-8")
+        title 数据中心监控平台
+        meta(name="description", content="overview & stats")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+        // bootstrap & fontawesome
+        link(rel="stylesheet", href="/assets/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/assets/font-awesome/4.2.0/css/font-awesome.min.css")
+        // page specific plugin styles
+        // text fonts
+        link(rel="stylesheet", href="/assets/fonts/fonts.googleapis.com.css")
+        // ace styles
+        link#main-ace-style.ace-main-stylesheet(rel="stylesheet", href="/assets/css/ace.min.css")
+        // 动态表格
+        link(href="/assets/data-tables/css/demo_page.css", rel="stylesheet")
+        link(href="/assets/data-tables/css/demo_table.css", rel="stylesheet")
+        link(rel="stylesheet", href="/assets/data-tables/DT_bootstrap.css")
+        script(src="/assets/js/ace-extra.min.js")
+        // 引入 ECharts 文件
+        script(src="/js/echarts.js")
+        script(type="text/javascript", src="/js/fs-charts.js")
+        script(type="text/javascript", src="/js/js-charts.js")
+        style(type="text/css").
+            .dataTables_paginate.paging_bootstrap.pagination li {
+                float: left;
+                margin: 0 1px;
+                border: 1px solid #ddd;
+                list-style: none;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination li.disabled a {
+                color: #c7c7c7;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination li a {
+                color: #797979;
+                padding: 5px 10px;
+                display: inline-block;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination li:hover a, .dataTables_paginate.paging_bootstrap.pagination li.active a {
+                color: #fff;
+                background: #65cea7;
+                text-decoration: none;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination li:hover,
+            .dataTables_paginate.paging_bootstrap.pagination li.active {
+                border-color: #65cea7;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination li.disabled:hover,
+            .dataTables_paginate.paging_bootstrap.pagination li.disabled:hover a {
+                color: #C7C7C7;
+                background: #fff;
+                border-color: #DDDDDD;
+                cursor: no-drop;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination {
+                float: right;
+                margin-bottom: 15px;
+            }
+    body.no-skin
+        include ../include/header.html
+        #main-container.main-container
+            script(type="text/javascript").
+                try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+            #sidebar.sidebar.responsive.menu-min
+                script(type="text/javascript").
+                    try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+            include ../include/sidebar.html
+            .main-content
+                .page-content
+                    h2.page-header
+                        | 交换质量统计(表)
+                        .btn-group(style="float: right;padding-right: 10px")
+                            select(style="font-size:14px;heigth:100px;float: left;margin-right: 10px;margin-top: 5px;", onchange="window.location.href='/swap/getjd?name='+this.value")
+                                option(value="", selected="selected") 显示各部门节点
+                                option(value="1") 民政局
+                                option(value="2") 房地局
+                                option(value="3") 公安局
+                                option(value="4") 工商局
+                                option(value="5") 教育局
+                                option(value="6") 税务局
+                                option(value="7") 审计局
+                                option(value="8") 质检局
+                                option(value="1") 民政局
+                                option(value="2") 房地局
+                                option(value="3") 公安局
+                                option(value="4") 工商局
+                                option(value="5") 教育局
+                                option(value="6") 税务局
+                                option(value="7") 审计局
+                                option(value="8") 质检局
+                                option(value="1") 民政局
+                                option(value="2") 房地局
+                                option(value="3") 公安局
+                                option(value="4") 工商局
+                                option(value="5") 教育局
+                                option(value="6") 税务局
+                                option(value="7") 审计局
+                                option(value="8") 质检局
+                            button.btn.btn-info(type="button", onclick="window.location.href='#'") 按日
+                            button.btn.btn-default(type="button", onclick="window.location.href='#'") 按月
+                            button.btn.btn-default(type="button", onclick="window.location.href='#'") 按年
+                    .row
+                        .col-xs-12
+                            table#dynamic-table.table.table-striped.table-bordered.table-hover.bigger-110
+                                thead
+                                    tr
+                                        th.center 序号
+                                        th.center 部门
+                                        th.center 交换次数
+                                        th.center 接收总量
+                                        th.center 问题数据量
+                                        th.center 问题数据占比
+                                        th.center 最后交换时间
+                                tbody
+                                    tr.center
+                                        td 1
+                                        td
+                                            a(href="jd.html?name=1") 民政局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 2
+                                        td
+                                            a(href="jd.html?name=1") 房地局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 3
+                                        td
+                                            a(href="jd.html?name=1") 公安局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 4
+                                        td
+                                            a(href="jd.html?name=1") 工商局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 5
+                                        td
+                                            a(href="jd.html?name=1") 教育局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 6
+                                        td
+                                            a(href="jd.html?name=1") 税务局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 7
+                                        td
+                                            a(href="jd.html?name=1") 审计局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 8
+                                        td
+                                            a(href="jd.html?name=1") 质检局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 9
+                                        td
+                                            a(href="jd.html?name=1") 地税局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 10
+                                        td
+                                            a(href="jd.html?name=1") 民防办
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 11
+                                        td
+                                            a(href="jd.html?name=1") 司法局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 12
+                                        td
+                                            a(href="jd.html?name=1") 绿容局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 13
+                                        td
+                                            a(href="jd.html?name=1") 粮食局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 14
+                                        td
+                                            a(href="jd.html?name=1") 财政局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 15
+                                        td
+                                            a(href="jd.html?name=1") 体育局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 16
+                                        td
+                                            a(href="jd.html?name=1") 科委
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 17
+                                        td
+                                            a(href="jd.html?name=1") 国土资源局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 18
+                                        td
+                                            a(href="jd.html?name=1") 新闻出版局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 19
+                                        td
+                                            a(href="jd.html?name=1") 监狱管理局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                                    tr.center
+                                        td 20
+                                        td
+                                            a(href="jd.html?name=1") 生产监督管理局
+                                        td 23400
+                                        td 23400
+                                        td 500
+                                        td 3%
+                                        td 2017-2-17 14:00:00
+                        // /.span
+                    // /.row
+                //include ../include/footer.html
+                a#btn-scroll-up.btn-scroll-up.btn.btn-sm.btn-inverse(href="#")
+                    i.ace-icon.fa.fa-angle-double-up.icon-only.bigger-110
+            // /.main-container
+            // basic scripts
+            //if !IE
+            script(src="/assets/js/jquery-2.2.3.min.js")
+            // <![endif]
+            //if IE
+              script(src="assets/js/jquery.1.11.1.min.js")
+            //if !IE
+            script(type="text/javascript").
+                window.jQuery || document.write("<script src='/assets/js/jquery.min.js'>"+"<"+"/script>");
+            // <![endif]
+            //if IE
+              script(type="text/javascript").
+                window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>"+"<"+"/script>");
+            script(type="text/javascript").
+                if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+            script(src="/assets/js/bootstrap.min.js")
+            script(src="/assets/js/fuelux.tree.min.js")
+            // page specific plugin scripts
+            // ace scripts
+            script(src="/assets/js/ace-elements.min.js")
+            script(src="/assets/js/ace.min.js")
+            // 动态表格
+            script(type="text/javascript", language="javascript", src="/assets/data-tables/jquery.dataTables.js")
+            script(type="text/javascript", src="/assets/data-tables/DT_bootstrap.js")
+            script(src="/assets/data-tables/dynamic_table_init.js")

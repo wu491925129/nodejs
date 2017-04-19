@@ -1,0 +1,263 @@
+doctype html
+html(lang='en')
+    head
+        meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+        meta(charset='utf-8')
+        title 数据中心监控平台
+        meta(name="description",content="overview &amp; stats")
+        meta(name="viewport",content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+        link(href="/assets/data-tables/css/demo_page.css",rel="stylesheet")
+        link(href="/assets/data-tables/css/demo_table.css",rel="stylesheet")
+        link(rel="stylesheet",href="/assets/data-tables/DT_bootstrap.css")
+        //bootstrap & fontawesome
+        link(rel="stylesheet",href="/assets/css/bootstrap.min.css")
+        link(rel="stylesheet",href="/assets/font-awesome/4.2.0/css/font-awesome.min.css")
+        link(rel="stylesheet",href="/assets/css/bootstrap-datepicker.css")
+        //page specific plugin styles
+        //text fonts
+        link(rel="stylesheet",href="/assets/fonts/fonts.googleapis.com.css")
+        link(rel="stylesheet",href="/assets/css/ace.min.css",class="ace-main-stylesheet",id="main-ace-style")
+        script(src="/assets/js/ace-extra.min.js")
+        style.
+            .dataTables_paginate.paging_bootstrap.pagination li {
+                float: left;
+                margin: 0 1px;
+                border: 1px solid #ddd;
+                list-style: none;
+            }
+
+            .dataTables_paginate.paging_bootstrap.pagination li.disabled a {
+                color: #c7c7c7;
+            }
+
+            .dataTables_paginate.paging_bootstrap.pagination li a {
+                color: #797979;
+                padding: 5px 10px;
+                display: inline-block;
+            }
+
+            .dataTables_paginate.paging_bootstrap.pagination li:hover a, .dataTables_paginate.paging_bootstrap.pagination li.active a {
+                color: #fff;
+                background: #65cea7;
+                text-decoration: none;
+            }
+
+            .dataTables_paginate.paging_bootstrap.pagination li:hover,
+            .dataTables_paginate.paging_bootstrap.pagination li.active {
+                border-color: #65cea7;
+            }
+
+            .dataTables_paginate.paging_bootstrap.pagination li.disabled:hover,
+            .dataTables_paginate.paging_bootstrap.pagination li.disabled:hover a {
+                color: #C7C7C7;
+                background: #fff;
+                border-color: #DDDDDD;
+                cursor: no-drop;
+            }
+
+            .dataTables_paginate.paging_bootstrap.pagination {
+                float: right;
+                margin-bottom: 15px;
+            }
+        body.no-skin
+            include ../include/header.html
+            #main-container.main-container
+                script(type='text/javascript').
+                    try {
+                        ace.settings.check('main-container', 'fixed')
+                    } catch (e) {
+                    }
+                include ../include/sidebar.html
+                div.main-content
+                    div.page-content
+                        h2(class="page-header",style="margin-top: 5px") #{title}
+                            span(style="float: right;padding-right: 10px")
+                                div.btn-group
+                                    button(class="btn btn-info",type="button",onclick="window.location.href='#'") 按月
+                                    button(class="btn btn-default",type="button",onclick="window.location.href='#'") 按年
+                        br
+                        div(align="center")
+                            div(id="d2",style="float:left;width:60%;padding:5px 0;")
+                                div
+                                    div(class="col-xs-11 label label-xlg label-danger arrowed-in arrowed-right")
+                                        span(align="center",style="font-family:'微软雅黑';font-size:20px") 数据查询
+                                br
+                                br
+                                div
+                                    div(class="infobox infobox-red")
+                                        div(class="infobox-icon")
+                                            i(class="ace-icon  glyphicon glyphicon-folder-open")
+                                        div(class="infobox-data")
+                                            span(class="infobox-data-number") 4647次
+                                            div(class="infobox-content") 人口库查询
+                                    div(class="infobox infobox-red")
+                                        div(class="infobox-icon")
+                                            i(class="ace-icon  glyphicon glyphicon-folder-open")
+                                        div(class="infobox-data")
+                                            span(class="infobox-data-number") 4147次
+                                            div(class="infobox-content") 法人查询
+                                    div(class="infobox infobox-red")
+                                        div(class="infobox-icon")
+                                            i(class="ace-icon  glyphicon glyphicon-folder-open")
+                                        div(class="infobox-data")
+                                            span(class="infobox-data-number") 3947次
+                                            div(class="infobox-content") 房屋库查询
+                                    div(class="infobox infobox-red")
+                                        div(class="infobox-icon")
+                                            i(class="ace-icon  glyphicon glyphicon-folder-open")
+                                        div(class="infobox-data")
+                                            span(class="infobox-data-number") 1147次
+                                            div(class="infobox-content") 法人资质信息查询
+                                    div(class="infobox infobox-red")
+                                        div(class="infobox-icon")
+                                            i(class="ace-icon  glyphicon glyphicon-folder-open")
+                                        div(class="infobox-data")
+                                            span(class="infobox-data-number") 847次
+                                            div(class="infobox-content") 法人处罚信息查询
+                                    div(class="infobox infobox-red")
+                                        div(class="infobox-icon")
+                                            i(class="ace-icon  glyphicon glyphicon-folder-open")
+                                        div(class="infobox-data")
+                                            span(class="infobox-data-number") 347次
+                                            div(class="infobox-content") 法人查询
+                                br
+                                div
+                                    div(class="col-xs-11 label label-xlg label-success arrowed-in arrowed-right")
+                                        span(align="center",style="font-family:'微软雅黑';font-size:20px") 服务调用
+                                br
+                                br
+                                div
+                                    div.infobox.infobox-green
+                                        div.infobox-icon
+                                            i.ace-icon.glyphicon.glyphicon-resize-full
+                                        div.infobox-data
+                                            span.infobox-data-number 4347次
+                                            div.infobox-content 服务申请
+                                    div.infobox.infobox-green
+                                        div.infobox-icon
+                                            i.ace-icon.glyphicon.glyphicon-resize-full
+                                        div.infobox-data
+                                            span.infobox-data-number 4147次
+                                            div.infobox-content 服务审核
+                                    div.infobox.infobox-green
+                                        div.infobox-icon
+                                            i.ace-icon.glyphicon.glyphicon-resize-full
+                                        div.infobox-data
+                                            span.infobox-data-number 3747次
+                                            div.infobox-content 服务调用
+                                br
+                                div
+                                    div.col-xs-11.label.label-xlg.label-info.arrowed-in.arrowed-right
+                                        span(align="center",style="font-family:'微软雅黑';font-size:20px") 资源目录
+                                br
+                                br
+                                div
+                                    div.infobox.infobox-blue
+                                        div.infobox-icon
+                                            i.ace-icon.glyphicon.glyphicon-list-alt
+                                        div.infobox-data
+                                            span.infobox-data-number 1237次
+                                            div.infobox-content 目录编制
+                                    div.infobox.infobox-blue
+                                        div.infobox-icon
+                                            i.ace-icon.glyphicon.glyphicon-list-alt
+                                        div.infobox-data
+                                            span.infobox-data-number 1137次
+                                            div.infobox-content 目录发布
+                                    div.infobox.infobox-blue
+                                        div.infobox-icon
+                                            i.ace-icon.glyphicon.glyphicon-list-alt
+                                        div.infobox-data
+                                            span.infobox-data-number 957次
+                                            div.infobox-content 目录浏览
+                            div#d1(style="float:left;height:470px;width:40%")
+                include ../include/footer.html
+            script(src='/assets/js/jquery.2.1.1.min.js')
+            script.
+                window.jQuery || document.write("<script src='/assets/js/jquery.min.js'>"+"<"+"/script>");
+            script.
+                if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+            script(src="/assets/js/bootstrap.min.js")
+            script(src="/assets/js/bootstrap-datepicker.min.js")
+            script(src="/assets/js/bootstrap-datepicker.zh-CN.min.js")
+            script(src="/assets/js/jquery.bootstrap-duallistbox.min.js")
+            script(src="/assets/js/jquery.raty.min.js")
+            script(src="/assets/js/bootstrap-multiselect.min.js")
+            script(src="/assets/js/select2.min.js")
+            script(src="/assets/js/typeahead.jquery.min.js")
+            script(type="text/javascript",language="javascript",src="/assets/data-tables/jquery.dataTables.js")
+            script(type="text/javascript",src="/assets/data-tables/DT_bootstrap.js")
+            script(src="/assets/data-tables/dynamic_table_init.js")
+            script(src="/assets/js/ace.min.js")
+            script(src="/assets/echart/echarts.js")
+            script(src="/assets/echart/chart/bar.js")
+            script(src="/assets/echart/chart/pie.js")
+            script.
+                $(function () {
+                    $('li[type="sidebar"]').removeClass("active");
+                    $('li[id="czjk"]').attr('class', 'active');
+                });
+                require.config({
+                    paths: {
+                        echarts: '/assets/echart'
+                    }
+                });
+                require([
+                    'echarts',
+                    'echarts/chart/pie',
+                    'echarts/chart/bar'
+                ], function (ec) {
+                    drawd1(ec);
+                });
+                function drawd1(ec) {
+                    var myChart = ec.init(document.getElementById("d1"));
+                    var option = {
+                        title: {
+                            text: '各部门操作统计',
+                        },
+                        legend: {
+                            data: ['数据查询', '服务调用', '资源目录'],
+                            x: 'right',
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        calculable: true,
+                        xAxis: [
+                            {
+                                type: 'value',
+                                boundaryGap: [0, 0.01]
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'category',
+                                data: ['体育局', '统计局', '旅游局', '文化局', '交通局', '税务局', '残联', '安监局', '财政局', '环保局', '商务委', '建管委', '发改委', '计生局', '卫计委', '司法局', '公安局', '教育局', '科委']
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '数据查询',
+                                type: 'bar',
+                                stack: '总量',
+                                data: [23, 55, 88, 54, 80, 101, 112, 103, 114, 105, 121, 123, 323, 344, 434, 434, 567, 343, 656],
+                                itemStyle: {normal: {color: '#D15B47'}}
+                            },
+                            {
+                                name: '服务调用',
+                                type: 'bar',
+                                stack: '总量',
+                                data: [26, 32, 78, 55, 90, 131, 122, 133, 114, 125, 212, 233, 123, 244, 135, 334, 427, 656, 676],
+                                itemStyle: {normal: {color: '#84B357',}}
+                            },
+                            {
+                                name: '资源目录',
+                                type: 'bar',
+                                stack: '总量',
+                                data: [43, 44, 30, 123, 110, 101, 106, 122, 112, 111, 121, 93, 243, 134, 452, 334, 467, 555, 656],
+                                itemStyle: {normal: {color: '#5AB1EF'}}
+                            }
+                        ]
+                    };
+                    myChart.setOption(option);
+                }

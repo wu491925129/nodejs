@@ -1,0 +1,274 @@
+doctype html
+html(lang="en")
+    head
+        meta(http-equiv="X-UA-Compatible", content="IE=edge,chrome=1")
+        meta(charset="utf-8")
+        title 数据中心监控平台
+        meta(name="description", content="overview & stats")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0")
+        // bootstrap & fontawesome
+        link(rel="stylesheet", href="/assets/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/assets/font-awesome/4.2.0/css/font-awesome.min.css")
+        // page specific plugin styles
+        // text fonts
+        link(rel="stylesheet", href="/assets/fonts/fonts.googleapis.com.css")
+        // ace styles
+        link#main-ace-style.ace-main-stylesheet(rel="stylesheet", href="/assets/css/ace.min.css")
+        link(href="/assets/data-tables/css/demo_page.css", rel="stylesheet")
+        link(href="/assets/data-tables/css/demo_table.css", rel="stylesheet")
+        link(rel="stylesheet", href="/assets/data-tables/DT_bootstrap.css")
+        // ace settings handler
+        script(src="/assets/js/ace-extra.min.js")
+        style(type="text/css").
+            .dataTables_paginate.paging_bootstrap.pagination li {
+                float: left;
+                margin: 0 1px;
+                border: 1px solid #ddd;
+                list-style: none;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination li.disabled a {
+                color: #c7c7c7;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination li a {
+                color: #797979;
+                padding: 5px 10px;
+                display: inline-block;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination li:hover a, .dataTables_paginate.paging_bootstrap.pagination li.active a {
+                color: #fff;
+                background: #65cea7;
+                text-decoration: none;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination li:hover,
+            .dataTables_paginate.paging_bootstrap.pagination li.active {
+                border-color: #65cea7;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination li.disabled:hover,
+            .dataTables_paginate.paging_bootstrap.pagination li.disabled:hover a {
+                color: #C7C7C7;
+                background: #fff;
+                border-color: #DDDDDD;
+                cursor: no-drop;
+            }
+            .dataTables_paginate.paging_bootstrap.pagination {
+                float: right;
+                margin-bottom: 15px;
+            }
+            .h4text{
+                margin-left: 10px;
+                font-weight: 600;
+                font-family: 黑体;
+                font-size: 18px;
+                color:grey;
+            }
+            .col-xs-5{
+                padding-left: 0px;
+                padding-right: 0px;
+                height:125px;
+                width:80px;
+            }
+            .icon-size{
+                width:40px;
+                height: 40px;
+                margin-top: 5px;
+                margin-left: 5px;
+            }
+            .circle{
+                width: 50px;
+                height: 50px;
+                background-color:white;
+                border-radius: 50%;
+                -moz-border-radius: 50%;
+                -webkit-border-radius: 50%;
+                margin-left: 15px;
+                margin-top: 15px;
+            }
+            .p-text{
+                font-size: 13px;
+                letter-spacing: -2px;
+                font-family: 黑体;
+                font-weight: 600;
+                text-align:center;
+                margin-top: 10px;
+                color:white;
+            }
+            .btn-light1{
+                background-color:#f2f2f2;
+                padding-left: 0px;
+                height:125px;
+            }
+            .text{
+                font-size:30px;
+                padding-left: 0px;
+                padding-right: 0px;
+                text-align: right;
+                padding-top:20px;
+            }
+            .sm-text{
+                font-size: 15px;
+                text-align: right;
+            }
+            /*黄：#F9B24A  蓝：#5F9EED  灰：#6C8C9B  紫：#A87CED 绿：#72D753  红：#F4514E;*/
+
+    body.no-skin
+        include ../include/header.html
+        #main-container.main-container
+            script(type="text/javascript").
+                try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+
+            include ../include/sidebar.html
+            .main-content
+                .page-content
+                    .col-md-12
+                        h2.page-header
+                            | 交换日志查看
+                    // main page
+                    .row.panel
+                        .col-md-12
+                            .panel(style="background-color:#f5f5f5")
+                                h4.h4text 人口库日志
+
+                        .col-md-12
+                            .col-sm-3
+                                .col-xs-5.btn-danger
+                                    p.p-text 人口基本信息
+                                    .circle
+                                        img.icon-size(src="/assets/img/9.png", alt="")
+                                .col-xs-8.btn-light1
+                                    .col-md-12.text
+                                        span #{datas[0][0].count1}
+                                        span.sm-text 条
+                                    .col-md-12
+                                        span
+                                            strong 数据最后更新时间:
+                                    .col-md-12
+                                        p.sm-text 2017-3-20
+                    .row.panel
+                        .col-md-12
+                            .panel(style="background-color:#f5f5f5")
+                                h4.h4text 法人库日志
+                        .col-md-12
+                            .col-sm-3
+                                .col-xs-5.btn-info
+                                    p.p-text 法人基本信息
+                                    .circle
+                                        img.icon-size(src="/assets/img/5.png", alt="")
+                                .col-xs-8.btn-light1
+                                    .col-md-12.text
+                                        span #{ datas[1][0].count2 }
+                                        span.sm-text 条
+                                    .col-md-12
+                                        span
+                                            strong 数据最后更新时间:
+                                    .col-md-12
+                                        p.sm-text 2017-3-20
+                            .col-sm-3
+                                .col-xs-5.btn-success
+                                    p.p-text 法人资质信息
+                                    .circle
+                                        img.icon-size(src="/assets/img/1.png", alt="")
+                                .col-xs-8.btn-light1
+                                    .col-md-12.text
+                                        span 864532
+                                        span.sm-text 条
+                                    .col-md-12
+                                        span
+                                            strong 数据最后更新时间:
+                                    .col-md-12
+                                        p.sm-text 2017-3-20
+                            .col-sm-3
+                                .col-xs-5.btn-purple
+                                    p.p-text 法人登记信息
+                                    .circle
+                                        img.icon-size(src="/assets/img/8.png", alt="")
+                                .col-xs-8.btn-light1
+                                    .col-md-12.text
+                                        span 784658
+                                        span.sm-text 条
+                                    .col-md-12
+                                        span
+                                            strong 数据最后更新时间:
+                                    .col-md-12
+                                        p.sm-text 2017-3-20
+                            .col-sm-3
+                                .col-xs-5.btn-warning
+                                    p.p-text 法人处罚信息
+                                    .circle
+                                        img.icon-size(src="/assets/img/2.png", alt="")
+                                .col-xs-8.btn-light1
+                                    .col-md-12.text
+                                        span 8848
+                                        span.sm-text 条
+                                    .col-md-12
+                                        span
+                                            strong 数据最后更新时间:
+                                    .col-md-12
+                                        p.sm-text 2017-3-20
+                    .row.panel
+                        .col-md-12
+                            .panel(style="background-color:#f5f5f5")
+                                h4.h4text 房屋库日志
+                        .col-md-12
+                            .col-sm-3
+                                .col-xs-5.btn-danger
+                                    p.p-text 房屋基本信息
+                                    .circle
+                                        img.icon-size(src="/assets/img/10.png", alt="")
+                                .col-xs-8.btn-light1
+                                    .col-md-12.text
+                                        span 583453
+                                        span.sm-text 条
+                                    .col-md-12
+                                        span
+                                            strong 数据最后更新时间:
+                                    .col-md-12
+                                        p.sm-text 2017-3-20
+                            .col-sm-3
+                                .col-xs-5.btn-warning
+                                    p.p-text 人户分离信息
+                                    .circle
+                                        img.icon-size(src="/assets/img/12.png", alt="")
+                                .col-xs-8.btn-light1
+                                    .col-md-12.text
+                                        span 14532
+                                        span.sm-text 条
+                                    .col-md-12
+                                        span
+                                            strong 数据最后更新时间:
+                                    .col-md-12
+                                        p.sm-text 2017-3-20
+                // Footer
+                include ../include/footer.html
+                a#btn-scroll-up.btn-scroll-up.btn.btn-sm.btn-inverse(href="#")
+                    i.ace-icon.fa.fa-angle-double-up.icon-only.bigger-110
+            // /.main-container
+            // basic scripts
+            //if !I
+            script(src="/assets/js/jquery-2.2.3.min.js")
+            // <![endif]
+            //if IE
+              script(src="assets/js/jquery.1.11.1.min.js")
+            //if !IE
+            script(type="text/javascript").
+                window.jQuery || document.write("<script src='/assets/js/jquery.min.js'>"+"<"+"/script>");
+            // <![endif]
+            //if IE
+              script(type="text/javascript").
+                window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>"+"<"+"/script>");
+
+            script(type="text/javascript").
+                if('ontouchstart' in document.documentElement) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+
+            script(src="/assets/js/bootstrap.min.js")
+            // page specific plugin scripts
+            script(src="/assets/js/fuelux.tree.min.js")
+            // ace scripts
+            script(src="/assets/js/ace-elements.min.js")
+
+            script(src="/assets/js/ace.min.js")
+
+            script(type="text/javascript", language="javascript", src="/assets/data-tables/jquery.dataTables.js")
+
+            script(type="text/javascript", src="/assets/data-tables/DT_bootstrap.js")
+
+            script(src="/assets/data-tables/dynamic_table_init.js")
